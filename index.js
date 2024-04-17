@@ -1,9 +1,11 @@
-import express from 'express'
+import express from 'express';
+import exphbs, { engine } from 'express-handlebars';
 
-const app = express()
+const app = express();
 
+// Configurar Handlebars como motor de plantillas
 app.engine('.hbs', engine({ extname: '.hbs' }));
-app.set('views engine', '.hbs');
+app.set('view engine', '.hbs');
 app.set('views', './views');
 
 app.get('/', (req, res) => {
@@ -12,6 +14,8 @@ app.get('/', (req, res) => {
 
 app.get('/services', (req, res) =>{
     res.render('services');
-})
+});
 
-app.listen(5001,() => console.log(`Servidor encendido http://localhost:${5001}`))
+app.listen(5001, () => {
+    console.log(`Servidor encendido http://localhost:${5001}`);
+});
