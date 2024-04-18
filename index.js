@@ -1,9 +1,14 @@
 import express from 'express';
-import exphbs, { engine } from 'express-handlebars';
+import  { engine } from 'express-handlebars';
 
 const app = express();
 
-// Configurar Handlebars como motor de plantillas
+// Public directory
+app.use(express.static('public'))
+
+app.use('/css', express.static('node_modules/bootstrap/dist/css'))
+
+// Handlebars
 app.engine('.hbs', engine({ extname: '.hbs' }));
 app.set('view engine', '.hbs');
 app.set('views', './views');
