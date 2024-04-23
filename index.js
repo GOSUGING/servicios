@@ -2,6 +2,7 @@ import express from 'express';
 import  { engine } from 'express-handlebars';
 import { services } from './data/services.data.js';
 import path from 'path'
+import { title } from 'process';
 
 
 const app = express();
@@ -37,8 +38,16 @@ app.get('/services/:name', (req, res) => {
     const service = services.find((item) => item.url === `/services/${nameUrl}`)
     console.log(service)
 
+if(!service){
+    return res.render('404', { title: "No se encuentra el servicio"})
+}
+
    return res.render('service', { service })
 }); 
+
+app.get('*', (req, res) =>{
+    return res.status(404).render('404', { title: "No se encunetra el servicio"})
+})
 
 app.listen(5001, () => {
     console.log(`Servidor encendido http://localhost:${5001}`);
