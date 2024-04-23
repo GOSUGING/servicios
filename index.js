@@ -7,21 +7,20 @@ import path from 'path'
 const app = express();
 
 const __dirname = import.meta.dirname;
-console.log(__dirname)
-console.log(path.join(__dirname, '/views/layaouts/main.hbs'))
+
 
 // Public directory
-app.use(express.static('public'))
+app.use(express.static(path.join(__dirname,'/public')))
 
-app.use('/css', express.static('node_modules/bootstrap/dist/css'))
-app.use('/js', express.static('node_modules/bootstrap/dist/js'))
-app.use('/js', express.static('node_modules/jquery/dist'))
+app.use('/css', express.static(path.join(__dirname,'/node_modules/bootstrap/dist/css')))
+app.use('/js', express.static(path.join(__dirname,'/node_modules/bootstrap/dist/js')))
+app.use('/js', express.static(path.join(__dirname,'/node_modules/jquery/dist')))
 
 // Handlebars
 
 app.engine('.hbs', engine({ extname: '.hbs' }));
 app.set('view engine', '.hbs');
-app.set('views', './views');
+app.set('views',path.join( __dirname, '/views'));
 
 app.get('/', (req, res) => {
     res.render('home', {title: 'Home Page 2.0'});
